@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Store basic user authentication info and role.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile with display name and avatar.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bio": { "type": "string" }
+      }
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Educational course information.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["AI Skill Learning", "Digital Skill", "Business Skill", "Career Skill", "Automation Skill"] },
+        "thumbnail": { "type": "string" },
+        "level": { "type": "string" },
+        "duration": { "type": "string" },
+        "isPublished": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category", "isPublished", "createdAt"]
+    },
+    "Lesson": {
+      "title": "Lesson",
+      "description": "A single lesson within a course.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "order": { "type": "integer" },
+        "type": { "type": "string", "enum": ["text", "video"] }
+      },
+      "required": ["courseId", "title", "content", "order", "type"]
+    },
+    "Roadmap": {
+      "title": "Roadmap",
+      "description": "Learning path roadmap.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "createdAt"]
+    },
+    "RoadmapStep": {
+      "title": "Roadmap Step",
+      "description": "A step within a roadmap.",
+      "type": "object",
+      "properties": {
+        "roadmapId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "integer" },
+        "relatedCourseIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["roadmapId", "title", "order"]
+    },
+    "Prompt": {
+      "title": "Prompt",
+      "description": "AI prompt template.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "category", "createdAt"]
+    },
+    "UserProgress": {
+      "title": "User Progress",
+      "description": "Track lesson completion.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "courseId": { "type": "string" },
+        "lessonId": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "completedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "courseId", "lessonId", "completed"]
+    },
+    "ProblemReport": {
+      "title": "Problem Report",
+      "description": "AI analyzed problem report.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "problem": { "type": "string" },
+        "summary": { "type": "string" },
+        "rootCause": { "type": "string" },
+        "skillsToLearn": { "type": "array", "items": { "type": "string" } },
+        "actionPlan7Day": { "type": "string" },
+        "actionPlan30Day": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "problem", "createdAt"]
+    },
+    "ChatHistory": {
+      "title": "Chat History",
+      "description": "Chat log between user and AI.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "messages": { "type": "array", "items": { "type": "object" } },
+        "lastUpdatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "messages", "lastUpdatedAt"]
+    }
+  },
+  "firestore": {
+    "users": { "schema": "User", "description": "Users and their roles." },
+    "profiles": { "schema": "Profile", "description": "User profiles." },
+    "courses": { "schema": "Course", "description": "Available courses." },
+    "lessons": { "schema": "Lesson", "description": "Lessons within courses." },
+    "roadmaps": { "schema": "Roadmap", "description": "Learning roadmaps." },
+    "roadmap_steps": { "schema": "RoadmapStep", "description": "Steps in roadmaps." },
+    "prompts": { "schema": "Prompt", "description": "AI prompts library." },
+    "user_progress": { "schema": "UserProgress", "description": "User learning progress." },
+    "problem_reports": { "schema": "ProblemReport", "description": "History of solved problems." },
+    "chat_history": { "schema": "ChatHistory", "description": "AI Coach chat history." }
+  }
+}

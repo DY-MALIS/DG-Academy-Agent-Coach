@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body oncontextmenu="return false;">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Disable right-click
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      
+      // Disable f12, ctrl+shift+i, ctrl+shift+j, ctrl+u
+      document.addEventListener('keydown', e => {
+        if (
+          e.keyCode === 123 || // F12
+          (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
+          (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
+          (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
+
